@@ -1,0 +1,54 @@
+.navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2; /* Higher z-index to ensure it’s above the background */
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3); /* Optional: Semi-transparent background */
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
+}
+.btn {
+  padding: 5px 15px;
+  font-size: 15px;
+  font-weight: bold;
+}
+  
+  .nav-link {
+    color: white !important;
+  }
+  
+  .nav-link:hover {
+    color: #ffeb3b !important; /* Adds a hover effect */
+  }
+  
+  .btn-outline-light {
+    border-color: #ffffff;
+  }
+  
+  .btn-warning {
+    background-color: #f8c200;
+    border: none;
+  }
+  
+  .form-control-dark {
+    background-color: #495057;
+    color: white;
+    border: none;
+  }
+  
+  /* For smaller screens (optional customization) */
+  @media (max-width: 576px) {
+    .navbar-nav {
+      text-align: center;
+    }
+  }
+
+  .navbar {
+    padding-left: 10px;   /* Adjust left padding */
+    padding-right: 10px;  /* Adjust right padding */
+  }
+  
+  
