@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import './EditCar.css'; // Ensure to import the CSS file here if not using inline styles
 
 const EditCarPage = () => {
   const [car, setCar] = useState({ title: '', description: '', tags: [], images: [] });
-  const [newImages, setNewImages] = useState([]); // To store newly selected images
-  const [deletedImages, setDeletedImages] = useState([]); // To store images marked for deletion
-  const [isLoading, setIsLoading] = useState(false); // Loading state for submit button
+  const [newImages, setNewImages] = useState([]);
+  const [deletedImages, setDeletedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -39,11 +40,10 @@ const EditCarPage = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setNewImages([...newImages, ...files]); // Add new images to the state
+    setNewImages([...newImages, ...files]);
   };
 
   const handleDeleteImage = (imagePath) => {
-    // Remove image from current images and add it to deletedImages state
     setCar(prevCar => ({
       ...prevCar,
       images: prevCar.images.filter(image => image !== imagePath),
@@ -61,14 +61,8 @@ const EditCarPage = () => {
     formData.append('title', car.title);
     formData.append('description', car.description);
     formData.append('tags', car.tags.join(','));
-
-    // Append existing images
     car.images.forEach(imagePath => formData.append('images', imagePath));
-    
-    // Append new images
     newImages.forEach(file => formData.append('images', file));
-    
-    // Append deleted images (sending as a stringified array)
     formData.append('deletedImages', JSON.stringify(deletedImages));
 
     try {
@@ -78,7 +72,7 @@ const EditCarPage = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      navigate(`/car/${id}`); // Redirect back to the car detail page after saving
+      navigate(`/car/${id}`);
     } catch (error) {
       console.error('Error updating car:', error.response ? error.response.data : error.message);
     } finally {
@@ -87,8 +81,8 @@ const EditCarPage = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Edit Car</h2>
+    <div style={{display:"block",marginTop:"100px"}} className="container">
+      <h2 className="edit-car-heading">Edit Car</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Title</label>
@@ -129,7 +123,7 @@ const EditCarPage = () => {
           <div className="image-preview">
             {car.images.map((image, index) => (
               <div key={index} className="image-item">
-                <img src={`http://localhost:5000/${image}`} alt={`Car ${index}`} width="100" />
+                <img src={`${process.env.REACT_APP_API_URL}/${image}`} alt={`Car ${index}`} width="100" />
                 <button
                   type="button"
                   className="btn btn-danger"
