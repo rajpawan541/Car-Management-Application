@@ -47,7 +47,7 @@ const ProductCreationPage = () => {
     });
 
     try {
-      await axios.post('http://localhost:5000/api/cars', formData, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/cars`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data',

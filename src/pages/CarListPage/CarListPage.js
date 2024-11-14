@@ -21,7 +21,7 @@ const CarListPage = () => {
         }
 
         // Fetch cars with authentication (pass token in headers)
-        const response = await axios.get('http://localhost:5000/api/cars', {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/cars`, {
           headers: {
             Authorization: `Bearer ${token}`, // Include token in the Authorization header
           },

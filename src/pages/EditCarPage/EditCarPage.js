@@ -16,7 +16,7 @@ const EditCarPage = () => {
       if (!token) return;
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/cars/${id}`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/cars/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCar(response.data);

@@ -20,7 +20,7 @@ const CarDetailPage = () => {
         }
 
         // Include the token in the request headers
-        const response = await axios.get(`http://localhost:5000/api/cars/${id}`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/cars/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -46,7 +46,7 @@ const CarDetailPage = () => {
       console.log('Deleting car with ID:', id); // Log the car id to verify it's correct
 
       // Include token in Authorization header for authentication
-      await axios.delete(`http://localhost:5000/api/cars/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/cars/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -81,7 +81,7 @@ const CarDetailPage = () => {
       <div className="row">
         <div className="col-md-6">
           <img
-            src={`http://localhost:5000/${car.images && car.images[0] ? car.images[0] : 'default-image.jpg'}`} // Use a default image if no image is found
+            src={`${process.env.REACT_APP_API_URL}/${car.images && car.images[0] ? car.images[0] : 'default-image.jpg'}`} // Use a default image if no image is found
             alt={car.title}
             className="img-fluid car-detail-image"
           />
@@ -99,10 +99,10 @@ const CarDetailPage = () => {
                   {car.images.map((image, index) => (
                     <div key={index} className="col-6 col-md-4 mb-3">
                       <img
-                        src={`http://localhost:5000/${image}`}
+                        src={`${process.env.REACT_APP_API_URL}/${image}`}
                         alt={`Car image ${index + 1}`}
                         className="car-image-thumbnail img-fluid"
-                        onClick={() => openModal(`http://localhost:5000/${image}`)} // Open modal on click
+                        onClick={() => openModal(`${process.env.REACT_APP_API_URL}/${image}`)} // Open modal on click
                         style={{ cursor: 'pointer' }} // Add cursor pointer style
                       />
                     </div>
