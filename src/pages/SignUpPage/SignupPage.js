@@ -14,27 +14,33 @@ const SignupPage = () => {
   // Form submission handler for Signup
   const handleSignup = async (e) => {
     e.preventDefault();
-
+  
     // Simple client-side validation
     if (!username || !email || !password) {
       setError('Please fill in all the fields.');
       return;
     }
-
+  
+    // Convert email to lowercase
+    const emailLowerCase = email.toLowerCase();
+  
     setLoading(true); // Start loading
-
+  
     try {
       // Make a POST request to the signup API
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, { username, email, password });
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, { username, email: emailLowerCase, password });
+      
+      // On successful signup
       setLoading(false); // Stop loading
       setError(''); // Reset error state
       navigate('/'); // Redirect to login page after successful signup
     } catch (error) {
       setLoading(false); // Stop loading
-      setError('Signup failed. Please try again later.');
+      const errorMessage = error.response?.data?.message || 'Signup failed. Please try again later.'; // Handle backend error messages
+      setError(errorMessage);
     }
   };
-
+  
   return (
     <div className="container">
       <div className="screen">

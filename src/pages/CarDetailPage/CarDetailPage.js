@@ -78,59 +78,60 @@ const CarDetailPage = () => {
 
   return (
     <div className="container car-detail-page">
-      <div className="row">
-        <div className="col-md-6">
-          <img
-            src={`${process.env.REACT_APP_API_URL}/${car.images && car.images[0] ? car.images[0] : 'default-image.jpg'}`} // Use a default image if no image is found
-            alt={car.title}
-            className="img-fluid car-detail-image"
-          />
-        </div>
-        <div className="col-md-6">
-          <h2>{car.title}</h2>
-          <p className="car-description">{car.description}</p>
-          <p><strong>Tags:</strong> {car.tags && car.tags.join(', ')}</p>
+  <div className="row">
+    <div className="col-md-6">
+      <img
+        src={`${process.env.REACT_APP_API_URL}/${car.images && car.images[0] ? car.images[0] : 'default-image.jpg'}`}
+        alt={car.title}
+        className="img-fluid car-detail-image"
+      />
+    </div>
+    <div className="col-md-6">
+      <h2>{car.title}</h2>
+      <p className="car-description">{car.description}</p>
+      <p><strong>Tags:</strong> {car.tags && car.tags.join(', ')}</p>
 
-          <div>
-            <h3>Car Images:</h3>
-            <div className="car-images">
-              {car.images && car.images.length > 0 ? (
-                <div className="row">
-                  {car.images.map((image, index) => (
-                    <div key={index} className="col-6 col-md-4 mb-3">
-                      <img
-                        src={`${process.env.REACT_APP_API_URL}/${image}`}
-                        alt={`Car image ${index + 1}`}
-                        className="car-image-thumbnail img-fluid"
-                        onClick={() => openModal(`${process.env.REACT_APP_API_URL}/${image}`)} // Open modal on click
-                        style={{ cursor: 'pointer' }} // Add cursor pointer style
-                      />
-                    </div>
-                  ))}
+      <div>
+        <h3>Car Images:</h3>
+        <div className="car-images">
+          {car.images && car.images.length > 0 ? (
+            <div className="row">
+              {car.images.map((image, index) => (
+                <div key={index} className="col-6 col-md-4 mb-3">
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}/${image}`}
+                    alt={`Car image ${index + 1}`}
+                    className="car-image-thumbnail img-fluid"
+                    onClick={() => openModal(`${process.env.REACT_APP_API_URL}/${image}`)}
+                    style={{ cursor: 'pointer' }}
+                  />
                 </div>
-              ) : (
-                <p>No images available</p>
-              )}
+              ))}
             </div>
-          </div>
-
-          <div className="button-container mt-3">
-            <button className="btn btn-danger" onClick={handleDelete}>Delete Car</button>
-            <button className="btn btn-primary" onClick={handleEdit} style={{marginLeft:"20px"}}>Edit Car</button>
-          </div>
+          ) : (
+            <p>No images available</p>
+          )}
         </div>
       </div>
 
-      {/* Modal for image popup */}
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close-modal" onClick={closeModal}>&times;</span>
-            <img src={selectedImage} alt="Selected Car" className="img-fluid" />
-          </div>
-        </div>
-      )}
+      <div className="button-container mt-3">
+        <button className="btn btn-danger" onClick={handleDelete}>Delete Car</button>
+        <button className="btn btn-primary" onClick={handleEdit} style={{ marginLeft: '20px' }}>Edit Car</button>
+      </div>
     </div>
+  </div>
+
+  {/* Modal for image popup */}
+  {isModalOpen && (
+    <div className="modal-overlay" onClick={closeModal}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <span className="close-modal" onClick={closeModal}>&times;</span>
+        <img src={selectedImage} alt="Selected Car" className="img-fluid" />
+      </div>
+    </div>
+  )}
+</div>
+
   );
 };
 

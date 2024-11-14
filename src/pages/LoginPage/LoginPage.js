@@ -16,11 +16,14 @@ const LoginPage = () => {
       setError('Please enter both email and password.');
       return;
     }
-
+  
     setLoading(true);
-
+  
+    // Convert the email to lowercase to make the login case-insensitive
+    const emailLowerCase = email.toLowerCase();
+  
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password });
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email: emailLowerCase, password });
       localStorage.setItem('token', response.data.token);
       setError('');
       navigate('/profile'); // Redirect to home or cars page
@@ -30,6 +33,7 @@ const LoginPage = () => {
       setError('Invalid email or password.');
     }
   };
+  
 
   return (
     <div className="container">
