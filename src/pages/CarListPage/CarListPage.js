@@ -83,7 +83,7 @@ const CarListPage = () => {
               <div className="col-md-4" key={car._id}>
                 <div className="card">
                   <img
-                    src={`http://localhost:5000/${car.images[0]}`}
+                    src={`${process.env.REACT_APP_API_URL}/${car.images[0]}`}
                     alt={car.title}
                     className="card-img-top"
                   />
