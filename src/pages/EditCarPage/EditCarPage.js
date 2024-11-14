@@ -72,7 +72,7 @@ const EditCarPage = () => {
     formData.append('deletedImages', JSON.stringify(deletedImages));
 
     try {
-      await axios.put(`http://localhost:5000/api/cars/${id}`, formData, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/cars/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

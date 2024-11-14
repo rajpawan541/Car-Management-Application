@@ -28,7 +28,7 @@ const SignupPage = () => {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, { username, email, password });
       setLoading(false); // Stop loading
       setError(''); // Reset error state
-      navigate('/profile'); // Redirect to login page after successful signup
+      navigate('/'); // Redirect to login page after successful signup
     } catch (error) {
       setLoading(false); // Stop loading
       setError('Signup failed. Please try again later.');
